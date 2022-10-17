@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Ebookcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/me', [AuthController::class,'me']);
+
+//Route::get('/Ebooks', [Ebookcontroller::class,'show']);
+//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'index']);
+//Route::get('/Ebooks', [Ebookcontroller::class,'store']);
+//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'update']);
+//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'destroy']);
+
+Route::resource('Ebooks', EbookController::class)->except(
+    ['create', 'edit']
+);
