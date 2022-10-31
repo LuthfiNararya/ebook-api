@@ -22,12 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/me', [AuthController::class,'me']);
 
-//Route::get('/Ebooks', [Ebookcontroller::class,'show']);
-//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'index']);
-//Route::get('/Ebooks', [Ebookcontroller::class,'store']);
-//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'update']);
-//Route::get('/Ebooks/(id)', [Ebookcontroller::class,'destroy']);
+Route::get('/ebooks', [Ebookcontroller::class,'show']);
+Route::get('/ebooks/(id)', [Ebookcontroller::class,'index']);
+Route::get('/ebooks', [Ebookcontroller::class,'store']);
+Route::get('/ebooks/(id)', [Ebookcontroller::class,'update']);
+Route::get('/ebooks/(id)', [Ebookcontroller::class,'destroy']);
 
-Route::resource('Ebooks', EbookController::class)->except(
+Route::resource('ebooks', EbookController::class)->except(
     ['create', 'edit']
 );
