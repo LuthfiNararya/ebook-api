@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ebook;
-class Ebookcontroller extends Controller
+use App\Models\Author;
+
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class Ebookcontroller extends Controller
      */
     public function index()
     {
-        $ebook = ebook::all();
-        return $ebook;
+        $author = author::all();
+        return $author;
     }
 
     /**
@@ -35,17 +36,18 @@ class Ebookcontroller extends Controller
      */
     public function store(Request $request)
     {
-        $table = Ebook::create([
-            "title" => $request->title,
-            "description" => $request->description,
-            "author" => $request->author,
-            "publisher" => $request->publisher,
-            "date_of_issue" => $request->date_of_issue
+        $table = Author::create([
+            "name" => $request->name,
+            "date_of_birth" => $request->date_of_birth,
+            "place_of_birth" => $request->place_of_birth,
+            "gender" => $request->gender,
+            "email" => $request->email,
+            "hp" => $request->hp
         ]);
 
         return response()->json([
             'success' => 201,
-            'message' => 'data berhasil disimpan',
+            'message' => 'tersimpan gaes',
             'data' => $table
         ], 201);
     }
@@ -58,11 +60,11 @@ class Ebookcontroller extends Controller
      */
     public function show($id)
     {
-        $ebook = ebook::find($id);
-        if ($ebook) {
+        $author = author::find($id);
+        if ($author) {
             return response()->json([
                 'status' => 200,
-                'data' => $ebook
+                'data' => $author
 
             ], 200);
         }else {
@@ -93,24 +95,24 @@ class Ebookcontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ebook = ebook::find($id);
-        if($ebook){
-            $ebook->title = $request->title ? $request->title : $ebook->title;
-            $ebook->description = $request->description ? $request->description : $ebook->description;
-            $ebook->author = $request->author ? $request->author : $request->author;
-            $ebook->publisher= $request->publisher ? $request->publisher : $ebook->publisher;
-            $ebook->date_of_issue = $request->date_of_issue ? $request->date_of_issue : $ebook->date_of_issue;
-            $ebook->save();
+        $author = author::find($id);
+        if($author){
+            $author->name = $request->name ? $request->name : $author->name;
+            $author->date_of_birth = $request->date_of_birth ? $request->date_of_birth : $author->date_of_birth;
+            $author->place_of_birth = $request->place_of_birth ? $request->name : $author->place_of_birth;
+            $author->gender = $request->gender ? $request->gender : $author->gender;
+            $author->email = $request->email ? $request->email : $author->email;
+            $author->hp = $request->hp ? $request->hp : $author->hp;
+            $author->save();
             return response()->json([
                 'status' => 200,
-                'data' => $ebook
-            ],200);
-
-        } else {
+                'data' => $author
+            ], 200);
+        } else{
             return response()->json([
-                'status' =>404,
-                'message' => $id . 'tidak ditemukan'
-            ],404);
+                'status'=>404,
+                'message'=> $id . 'gad cuy!'
+            ], 404);
         }
     }
 
@@ -122,12 +124,12 @@ class Ebookcontroller extends Controller
      */
     public function destroy($id)
     {
-        $ebook = ebook::where('id',$id)->first();
-        if ($ebook) {
-            $ebook->delete();
+        $author = author::where('id',$id)->first();
+        if ($author) {
+            $author->delete();
             return response()->json([
               'status' => 200,
-              'data' => $ebook
+              'data' => $author
 
             ], 200);
         }else {

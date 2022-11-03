@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Ebookcontroller;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,8 @@ Route::get('/ebooks/(id)', [Ebookcontroller::class,'update']);
 Route::get('/ebooks/(id)', [Ebookcontroller::class,'destroy']);
 
 Route::resource('ebooks', EbookController::class)->except(
+    ['create', 'edit']
+);
+Route::resource('authors', AuthorController::class)->except(
     ['create', 'edit']
 );
